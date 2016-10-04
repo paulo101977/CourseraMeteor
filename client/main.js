@@ -35,7 +35,7 @@ Template.land.onCreated(function () {
 
 
     // subscribe to the posts publication
-    /*var subscription = instance.subscribe('videos');
+    var subscription = instance.subscribe('videos');
 
     // if subscription is ready, set limit to newLimit
     if (subscription.ready()) {
@@ -43,7 +43,7 @@ Template.land.onCreated(function () {
       console.dir(subscription)
     } else {
       console.log("> Subscription is not ready yet. \n\n");
-    }*/
+    }
   });
 
   // 2. Cursor
