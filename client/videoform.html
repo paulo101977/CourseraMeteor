@@ -1,0 +1,18 @@
+<template name="videoform">
+    <form name="videoform" id="videoform">
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input name="title" type="text" class="form-control" id="title">
+        </div>
+        <div class="form-group">
+          <label for="url">Url:</label>
+          <input name="url" type="text" class="form-control" id="url" placeholder="Video Url e.g. www.youtube.com/watch?v=FTfrKOQFPNA">
+        </div>
+        <div class="form-group">
+          <label for="comment">Comment:</label>
+          <textarea name="comment" class="form-control" rows="5" id="comment"></textarea>
+        </div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </form>
+</template>
