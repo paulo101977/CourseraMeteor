@@ -63,3 +63,29 @@
 .modal-dialog{
     margin: auto;
 }
+
+.modal-body{
+    max-height: none;
+    height: 450px;
+}
+
+
+.gi-5x{
+    margin: 0;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    -ms-transform: translate(-50%, -25%);
+    transform: translate(-50%, -25%);
+    font-size: 10em;
+    text-align: center;
+    color:white;
+}
+
+.gi-5x:hover{
+    color: lightskyblue;
+}
+
+.min-height{
+    min-height: 400px;
+}

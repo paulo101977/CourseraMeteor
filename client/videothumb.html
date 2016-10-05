@@ -1,0 +1,23 @@
+<template name="videothumb">
+    <div class="col-md-4">
+        <!-- div class="embed-responsive embed-responsive-16by9" -->
+            <!-- iframe class="embed-responsive-item" src="{{url}}"></iframe -->
+            
+            <div class="thumbnail">
+              <a alt="{{title}} - {{comment}}" href="/video/{{youtube}}"><i class="glyphicon glyphicon-play-circle img-responsive gi-5x"></i></a>
+              <img class="img-responsive custom-img" src="//img.youtube.com/vi/{{getThumb(url)}}/0.jpg" alt="...">
+              <div class="caption">
+                <h3>{{title}}</h3>
+                <p>{{comment}}</p>
+                <p>{{username}}</p>
+                <p>{{> starsRating rating=5 size='lg' mutable=false}}</p>
+                <p>
+                    <a href="#" class="btn btn-primary {{#if testUser username}}disabled{{/if}}" role="button">Edit</a> 
+                    <a href="#" class="btn btn-danger {{#if testUser username}}disabled{{/if}}" role="button">Delete</a>
+                </p>
+              </div>
+            </div>
+            
+        <!-- /div -->
+    </div>
+</template>

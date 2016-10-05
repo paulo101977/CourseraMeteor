@@ -1,16 +1,41 @@
+
 <template name="video">
-    <div class="col-md-4">
-        <!-- div class="embed-responsive embed-responsive-16by9" -->
-            <!-- iframe class="embed-responsive-item" src="{{url}}"></iframe -->
-            
-            <div class="thumbnail">
-              <img class="img-responsive custom-img" src="//img.youtube.com/vi/{{getThumb(url)}}/0.jpg" alt="...">
-              <div class="caption">
-                <h3>Thumbnail label</h3>
-                <p>...</p>
-                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-d efault" role="button">Button</a></p>
-              </div>
+    {{> navbar}}
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="embed-responsive embed-responsive-16by9 min-height">
+                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{youtube}}" frameborder="0" allowfullscreen></iframe>
+                </div>
             </div>
-        <!-- /div -->
+            <div class="col-md-6">
+                <div class="panel panel-default min-height">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{title}}</h3>
+                  </div>
+                  <div class="panel-body">
+                      <blockquote>
+                          <p>{{> starsRating rating=4.5 size='lg' mutable=false}}</p>
+                          <p>{{comment}}</p>
+                          <footer>{{username}}</footer>
+                      </blockquote>
+                      
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">Comments:</div>
+            {{#each comments}}
+                <div class="col-md-12">
+                    {{> comment_template}}
+                </div>
+            {{/each}}
+        </div>
+        
     </div>
+    
+    {{> modalvideo}}
+    
 </template>

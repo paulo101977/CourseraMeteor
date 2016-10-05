@@ -6,6 +6,7 @@ allow-deny@1.0.5
 autoupdate@1.2.11
 babel-compiler@6.9.1
 babel-runtime@0.1.11
+barbatus:stars-rating@1.1.1
 base64@1.0.9
 binary-heap@1.0.9
 blaze@2.1.9
