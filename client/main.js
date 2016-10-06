@@ -100,6 +100,7 @@ Template.videoform.events({
     var comment = target.comment.value;
     var title = target.title.value;
     var youtube_video_id = url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/).pop();
+    var rating = $('#rating').data('userrating');
     
     //clear form
         
@@ -109,7 +110,7 @@ Template.videoform.events({
     
     
     //new data object
-    var obj = {url : url , youtube : youtube_video_id , title : title , comment : comment , username : Meteor.user().username}
+    var obj = {url : url , youtube : youtube_video_id , title : title , comment : comment , username : Meteor.user().username , rating : rating}
 
     //insert in database
     Videos.insert(obj)

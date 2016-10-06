@@ -13,9 +13,9 @@ Meteor.startup(() => {
 
     Videos.remove({}); //delete all
 
-    Videos.insert({youtube: "zgLRFwwbLi8" , title : "Title One" , comment : "Comment One",url:"https://www.youtube.com/embed/zgLRFwwbLi8" , username:"paulo101977"});
-    Videos.insert({youtube: "pUb63Dc7-Bw" , title : "Title Two" , comment : "Comment two",url:"https://www.youtube.com/embed/pUb63Dc7-Bw" , username:"paulo101977"});
-    Videos.insert({youtube: "QA_tK8wffwc" , title : "Title Three" , comment : "Comment Three",url:"https://www.youtube.com/embed/QA_tK8wffwc" , username:"paulo101977"});
+    Videos.insert({youtube: "zgLRFwwbLi8" , title : "Title One" , comment : "Comment One",url:"https://www.youtube.com/embed/zgLRFwwbLi8" , username:"paulo101977" , rating : "5"});
+    Videos.insert({youtube: "pUb63Dc7-Bw" , title : "Title Two" , comment : "Comment two",url:"https://www.youtube.com/embed/pUb63Dc7-Bw" , username:"paulo101977" , rating : "3"});
+    Videos.insert({youtube: "QA_tK8wffwc" , title : "Title Three" , comment : "Comment Three",url:"https://www.youtube.com/embed/QA_tK8wffwc" , username:"paulo101977" , rating : "4"});
     
     Comments.remove({});
     
