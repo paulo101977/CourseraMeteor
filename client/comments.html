@@ -1,6 +1,14 @@
 <template name="comment_template">
-    <blockquote>
-      <p>{{comment}}</p>
-      <footer>{{username}}</footer>
-    </blockquote>
+    
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <blockquote>
+              <p>{{comment}}</p>
+              <p>{{> starsRating rating=rating size='lg' mutable=false}}</p>
+              <footer>{{username}}</footer>
+            </blockquote>
+            <button class="btn btn-primary {{#if getUser username}}disabled{{/if}}">Edit</button><button class="btn btn-danger {{#if getUser username}}disabled{{/if}}">Delete</button>
+        </div>
+    </div>
+    
 </template>

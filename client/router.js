@@ -15,12 +15,16 @@ Router.route('/land', function () {
 
 Router.route('/video/:_id', function(){
     
+    Meteor.subscribe('videos');
     var video = Videos.findOne({youtube: this.params._id});
 
     if(video){
         this.render('video', {data:video})
     } else {
         //this.next();
+        //var video = Videos.findOne({youtube: this.params._id});
+        //this.render('video', {data:video})
+        this.next();
     }
     
 });

@@ -107,10 +107,13 @@ Template.videoform.events({
     $(target.url).val("")
     $(target.comment).val("")
     $(target.title).val("")
+    $('#rating').trigger('reset');
+    
+    var user = Meteor.user().username
     
     
     //new data object
-    var obj = {url : url , youtube : youtube_video_id , title : title , comment : comment , username : Meteor.user().username , rating : rating}
+    var obj = {url : url , youtube : youtube_video_id , title : title , comment : comment , username : user , rating : rating}
 
     //insert in database
     Videos.insert(obj)
@@ -138,6 +141,8 @@ Template.video.onCreated(function(){
     instance.comments = function(){
         return Comments.find({youtube: data.youtube})
     }
+    
+    Session.set('clicked', false);
 })
 
 
@@ -150,22 +155,91 @@ Template.video.helpers({
     }
 })
 
+Template.video.events({
+    'click .btn-comment'(event , instance){
+        var clicked = Session.get('clicked');
+        
+        if(!clicked){
+            $("#commentcontainer").stop().animate({
+                height : 300,
+                'border-width' : 2
+            },200)
+        } else {
+            $("#commentcontainer").stop().animate({
+                height : 0,
+                'border-width' : 0
+            },200)
+        }
+        
+        Session.set('clicked', !clicked);
+    }
+})
 
-/*Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+Template.commentform.onCreated(function () {
+
+  // 1. Initialization
+
+  var instance = this;
+    
+
+
+  // 1. Autorun
+
+  // will re-run when the "limit" reactive variables changes
+  instance.autorun(function () {
+    // subscribe to the posts publication
+    var subscription = instance.subscribe('comments',instance.data.youtube);
+  });
+
+
+
 });
 
+Template.comment_template.helpers({
+    getUser : function(username){
+              
+        if(Meteor.user()){
+            if(username == Meteor.user().username){
+                return false;
+            }
+            return true;
+        }
+        return true
+    }
+})
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
+Template.commentform.events({
+    'submit #comments'(event,instance){
+        
+        event.preventDefault();
+        event.stopPropagation();
+        
+        var clicked = Session.get('clicked');
+        Session.set('clicked', !clicked);
+        
+        $("#commentcontainer").stop().animate({
+            height : 0,
+            'border-width' : 0
+        },200)
+       
+        
+        var target = event.target;
+        var comment = target.commentarea.value;
+        var rating = $('#ratingcomment').data('userrating');
+        var youtube = instance.data.youtube;
+        var user = Meteor.user().username;
+        
+        $(target.commentarea).val("");
+        $('#ratingcomment').trigger('reset')
+        
+        //var rating = "3";
+        
+        if(!rating) rating = 0;
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});*/
+        
+        var obj = {comment : comment , youtube : youtube , username : user , rating : rating}
+        
+        Comments.insert(obj);
+    }
+})
+

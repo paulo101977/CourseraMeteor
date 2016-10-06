@@ -19,8 +19,8 @@ Meteor.startup(() => {
     
     Comments.remove({});
     
-    Comments.insert({youtube: "zgLRFwwbLi8" , comment : "Comment One" , username:"paulo101977"})
-    Comments.insert({youtube: "zgLRFwwbLi8" , comment : "Comment Two" , username:"paulo101977"})
+    Comments.insert({youtube: "zgLRFwwbLi8" , comment : "Comment One" , username:"paulo101977",rating: 3})
+    Comments.insert({youtube: "zgLRFwwbLi8" , comment : "Comment Two" , username:"paulo101977",rating:4})
     
 });
 

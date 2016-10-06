@@ -69,6 +69,12 @@
     height: 450px;
 }
 
+#commentcontainer{
+    height: 0px;
+    overflow:auto;
+    border-width: 0px;
+}
+
 
 .gi-5x{
     margin: 0;
