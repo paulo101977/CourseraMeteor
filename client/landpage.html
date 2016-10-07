@@ -1,14 +1,20 @@
 <template name="land">
-    {{> navbar}}
     
+    {{> sidenav}}
     
-    <div class="container">
-        <div class="row">
-            {{#each videos}}
-                {{> videothumb}}
-            {{/each}}
+    <div id="main">
+        {{> navbar}}
+
+        <div class="container-fluid">
+            <div class="row">
+                {{#each videos}}
+                    {{> videothumb}}
+                {{/each}}
+            </div>
         </div>
     </div>
+    
+    {{> affixmenu}} <!-- render sort menu -->
     
     {{> modalvideo}} <!-- modal video -->
 </template>

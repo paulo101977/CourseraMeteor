@@ -9,16 +9,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Brand</a>
-            
-            
+          <a class="navbar-brand" href="/land"><i class="glyphicon glyphicon-play-circle"></i></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Link</a></li>
+            <a href="/land" class="btn btn-default">Home</a>
+            {{#if toggleSort}}<a class="btn btn-default btn-sort">Sort</a>{{/if}}
+            <a href="/about" class="btn btn-default">About</a>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {{#if currentUser}}

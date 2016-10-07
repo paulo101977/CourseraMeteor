@@ -63,6 +63,45 @@ Template.navbar.events({
 Template.navbar.helpers({
     toggleModal(){
         $('#modalvideo').modal('toggle')
+    },
+    toggleSort(){
+         var name = Router.current().route.getName();
+        
+        //console.dir(name)
+        if(name == 'land'){
+            return true;
+        }
+        
+        return false
+    }
+})
+
+
+Template.navbar.events({
+    'click .btn-sort'(event,instance){
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+        document.body.style.backgroundColor = "rgba(0,0,0,0.7)";
+    }
+})
+
+Template.navbar.rendered = function() {
+    /*$(".btn-sort").popover({
+        html: true,
+        title: 'Sort',
+        animation: true,
+        placement: 'bottom',
+        content: function() {
+            return $(".customaffix").html();
+        }
+    });*/
+}
+
+Template.sidenav.events({
+    'click .closebtn'(event,instance){
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+        document.body.style.backgroundColor = "white";
     }
 })
 

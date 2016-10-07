@@ -12,6 +12,10 @@ Router.route('/land', function () {
   });
 });
 
+Router.route('about' , function(){
+    this.render('about', {});
+})
+
 
 Router.route('/video/:_id', function(){
     
