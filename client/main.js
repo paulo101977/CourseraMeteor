@@ -81,7 +81,7 @@ Template.navbar.events({
     'click .btn-sort'(event,instance){
         document.getElementById("mySidenav").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";
-        document.body.style.backgroundColor = "rgba(0,0,0,0.7)";
+        //document.body.style.backgroundColor = "rgba(0,0,0,0.7)";
     }
 })
 
@@ -101,7 +101,7 @@ Template.sidenav.events({
     'click .closebtn'(event,instance){
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
-        document.body.style.backgroundColor = "white";
+        //document.body.style.backgroundColor = "white";
     }
 })
 
@@ -168,13 +168,16 @@ Template.video.onCreated(function(){
     
     var instance = this;
     
-    console.log(this)
     
     //Session.set('videodata', data)
     
     if(data){
         instance.subscribe('comments',data.youtube);
     }
+    
+    instance.autorun(function(){
+        instance.subscribe('comments',data.youtube);
+    })
     
     // 2. Cursor to comments instance from database
     instance.comments = function(){
@@ -214,6 +217,30 @@ Template.video.events({
     }
 })
 
+Template.videos.onCreated(function(){
+    var instance = this;
+    
+    instance.subscribe('videos');
+    
+    instance.autorun(function(){
+        instance.subscribe('videos');
+    })
+    
+    instance.videos = function(){
+        return Videos.find({})
+    }
+})
+
+Template.videos.helpers({
+    videos : function(){
+        return Template.instance().videos();
+    },
+    getThumb(url) {
+        var youtube_video_id = url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/).pop();
+        return youtube_video_id;
+    },
+})
+
 Template.commentform.onCreated(function () {
 
   // 1. Initialization
@@ -223,7 +250,6 @@ Template.commentform.onCreated(function () {
 
 
   // 1. Autorun
-
   // will re-run when the "limit" reactive variables changes
   instance.autorun(function () {
     // subscribe to the posts publication

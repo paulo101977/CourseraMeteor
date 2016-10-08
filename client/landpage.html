@@ -1,11 +1,10 @@
 <template name="land">
     
-    {{> sidenav}}
-    
     <div id="main">
         {{> navbar}}
 
         <div class="container-fluid">
+            <h1>Caroussel Here</h1>
             <div class="row">
                 {{#each videos}}
                     {{> videothumb}}
@@ -17,4 +16,6 @@
     {{> affixmenu}} <!-- render sort menu -->
     
     {{> modalvideo}} <!-- modal video -->
+    
+    {{> sidenav}}
 </template>

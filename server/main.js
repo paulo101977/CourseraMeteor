@@ -16,6 +16,10 @@ Meteor.startup(() => {
     Videos.insert({youtube: "zgLRFwwbLi8" , title : "Title One" , comment : "Comment One",url:"https://www.youtube.com/embed/zgLRFwwbLi8" , username:"paulo101977" , rating : "5"});
     Videos.insert({youtube: "pUb63Dc7-Bw" , title : "Title Two" , comment : "Comment two",url:"https://www.youtube.com/embed/pUb63Dc7-Bw" , username:"paulo101977" , rating : "3"});
     Videos.insert({youtube: "QA_tK8wffwc" , title : "Title Three" , comment : "Comment Three",url:"https://www.youtube.com/embed/QA_tK8wffwc" , username:"paulo101977" , rating : "4"});
+    Videos.insert({youtube: "zgLRFwwbLi8" , title : "Title Four" , comment : "Comment Four",url:"https://www.youtube.com/embed/zgLRFwwbLi8" , username:"paulo" , rating : "1"});
+    Videos.insert({youtube: "pUb63Dc7-Bw" , title : "Title Five" , comment : "Comment Five",url:"https://www.youtube.com/embed/pUb63Dc7-Bw" , username:"paulo" , rating : "5"});
+    Videos.insert({youtube: "QA_tK8wffwc" , title : "Title Six" , comment : "Comment Six",url:"https://www.youtube.com/embed/QA_tK8wffwc" , username:"paulo101977" , rating : "2"});
+    
     
     Comments.remove({});
     

@@ -1,0 +1,26 @@
+<template name="videos">
+    <div id="main">
+        {{> navbar}}
+        <div class=container>
+            {{#each videos}}
+                <div class="row">
+                    <div class="media">
+                      <div class="media-left">
+                        <a href="#">
+                          <img class="media-object" src="//img.youtube.com/vi/{{getThumb(url)}}/0.jpg" width="64px" height="64px" alt="{{title}}" />
+                        </a>
+                      </div>
+                      <div class="media-body">
+                        <h4 class="media-heading">{{title}}</h4>
+                        <p>{{comment}}</p>
+                        <p>{{> starsRating rating=rating size='lg' mutable=false}}</p>
+                      </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+    
+    {{> sidenav}}
+
+</template>
