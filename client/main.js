@@ -15,10 +15,17 @@ Accounts.ui.config({
 });
 
 
+//global helper
+Template.registerHelper("getThumb", function (url) {
+    var youtube_video_id = url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/).pop();
+    return youtube_video_id;
+});
+
+
+
 Template.land.onCreated(function () {
 
   // 1. Initialization
-
   var instance = this;
     
   //Videos = new Mongo.Collection('videos');
@@ -52,13 +59,43 @@ Template.land.helpers({
     }
 })
 
-Template.navbar.events({
-    'click .btn-video'(event){
-        event.stopPropagation();
+Template.caroussel.onCreated(function(){
+  // 1. Initialization
+  var instance = this;
+    
+  //Videos = new Mongo.Collection('videos');
 
-        $('#modalvideo').modal('toggle');   
-    }
+
+  // 1. Autorun
+
+  // will re-run when the "limit" reactive variables changes
+  instance.autorun(function () {
+
+
+    // subscribe to the posts publication
+    var subscription = instance.subscribe('videos');
+  });
+
+  // 2. Cursor to videos instance from database
+  instance.videos = function() { 
+    return Videos.find({} , {limit : 3 , skip : Math.floor(Math.random() * Videos.find({}).count()) }) ;
+  }
 })
+
+Template.caroussel.helpers({
+    videos : function(){
+        return Template.instance().videos();
+    },
+    testIndex : function(index){
+        return index == 0;
+    },
+    /*
+    getThumb(url) {
+        var youtube_video_id = url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/).pop();
+        return youtube_video_id;
+    }*/
+})
+
 
 Template.navbar.helpers({
     toggleModal(){
@@ -82,6 +119,11 @@ Template.navbar.events({
         document.getElementById("mySidenav").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";
         //document.body.style.backgroundColor = "rgba(0,0,0,0.7)";
+    },
+    'click .btn-video'(event){
+        event.stopPropagation();
+
+        $('#modalvideo').modal('toggle');   
     }
 })
 
@@ -108,10 +150,10 @@ Template.sidenav.events({
 Template.videothumb.helpers({
     
     //get thumb url from youtube
-    getThumb(url) {
+    /*getThumb(url) {
         var youtube_video_id = url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/).pop();
         return youtube_video_id;
-    },
+    },*/
     testUser : function(username){
               
         if(Meteor.user()){
@@ -235,10 +277,10 @@ Template.videos.helpers({
     videos : function(){
         return Template.instance().videos();
     },
-    getThumb(url) {
+    /*getThumb(url) {
         var youtube_video_id = url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/).pop();
         return youtube_video_id;
-    },
+    },*/
 })
 
 Template.commentform.onCreated(function () {

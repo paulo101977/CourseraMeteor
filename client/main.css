@@ -18,6 +18,45 @@
   margin-top: 10%;
 }
 
+.item-img > img{
+    position: absolute;
+    left: 20%;
+    height: 270px !important;
+    width: auto;
+    top: 15px;
+}
+
+.carousel-caption{
+    position: absolute;
+    height: 270px !important;
+    width: auto;
+    top: 15px;
+    /* Firefox */
+    left: -moz-calc(20% + 360px);
+    /* WebKit */
+    left: -webkit-calc(20% + 360px);
+    /* Opera */
+    left: -o-calc(20% + 360px);
+    /* Standard */
+    left: calc(20% +  360px);
+}
+
+.carousel-item , .carousel-control{
+    margin-top: 20px;
+    min-height: 300px;
+}
+
+.carousel-item{
+   margin-bottom: 20px !important; 
+}
+
+.carousel-indicators{
+    max-height: 30px;
+    top: 250px !important;
+    width: auto;
+    margin-left: auto;
+}
+
 .login-buttons-dropdown-align- , .login-link-text{
     margin-top: 20px !important;
 }
