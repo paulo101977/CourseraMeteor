@@ -106,7 +106,7 @@ Template.navbar.helpers({
          var name = Router.current().route.getName();
         
         //console.dir(name)
-        if(name == 'land'){
+        if(name == 'land' || name == 'videos'){
             return true;
         }
         
@@ -133,8 +133,7 @@ Template.navbar.events({
 
 Template.navbar.rendered = function() {
     $(".btn-sort").popover({
-        html: true,
-        title: 'Sort',
+        html: true, 
         animation: true,
         placement: 'bottom',
         content: function() {
