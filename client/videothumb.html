@@ -12,7 +12,7 @@
                 <p>{{username}}</p>
                 <p>{{> starsRating rating=rating size='lg' mutable=false}}</p>
                 <p>
-                    <a href="#" class="btn btn-primary {{#if testUser username}}disabled{{/if}}" role="button">Edit</a> 
+                    <a href="#" class="btn btn-primary btn-edit {{#if testUser username}}disabled{{/if}}" role="button">Edit</a> 
                     <a href="#" class="btn btn-danger btn-delete {{#if testUser username}}disabled{{/if}}" role="button">Delete</a>
                 </p>
               </div>

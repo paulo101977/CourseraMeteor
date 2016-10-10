@@ -26,6 +26,12 @@ Router.route('/videos', {
      layoutTemplate: 'videos'
 });
 
+Router.route('/edit',{
+    template : 'editpage',
+    path : '/edit',
+    layoutTemplate : 'editpage'
+})
+
 
 Router.route('/video/:_id', {
      template : 'video',

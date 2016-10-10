@@ -178,6 +178,11 @@ Template.videothumb.events({
         //console.dir(instance)
         
         Session.set('todelete', instance.data.youtube);
+    },
+    'click .btn-edit'(event , instance){
+        event.stopPropagation();
+        
+        Router.go('edit')
     }
 })
 
