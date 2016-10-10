@@ -18,6 +18,24 @@
   margin-top: 10%;
 }
 
+.modaldelete > .modal-dialog{
+    height: auto;
+}
+
+.modal-body-delete{
+    height: inherit !important;
+}
+
+.stars-rating-custom > .stars-rating{
+    text-align: center;
+    margin: auto;
+}
+
+.panel-body-custom{
+    background-color: darkgray;
+    height: 230px;
+}
+
 .item-img > img{
     position: absolute;
     left: 20%;

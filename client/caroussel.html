@@ -16,7 +16,12 @@
               </div>
               <div class="carousel-caption">
                 <div class="panel panel-default">
-                  <div class="panel-body">{{comment}}</div>
+                    <div class="panel-body  text-center panel-body-custom">
+                        <p>{{title}}</p>
+                        <p>{{comment}}</p>
+                        <p>{{username}}</p>
+                        <p class="stars-rating-custom">{{> starsRating rating=rating size='lg' mutable=false}}</p>
+                    </div>
                 </div>
               </div>
             </div>

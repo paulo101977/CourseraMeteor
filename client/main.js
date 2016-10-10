@@ -59,6 +59,7 @@ Template.land.helpers({
     }
 })
 
+
 Template.caroussel.onCreated(function(){
   // 1. Initialization
   var instance = this;
@@ -115,7 +116,7 @@ Template.navbar.helpers({
 
 
 Template.navbar.events({
-    'click .btn-sort'(event,instance){
+    'click .btn-menu'(event,instance){
         document.getElementById("mySidenav").style.width = "250px";
         document.getElementById("main").style.marginLeft = "250px";
         //document.body.style.backgroundColor = "rgba(0,0,0,0.7)";
@@ -124,19 +125,22 @@ Template.navbar.events({
         event.stopPropagation();
 
         $('#modalvideo').modal('toggle');   
+    },
+    'click .btn-sort'(event, instance){
+        
     }
 })
 
 Template.navbar.rendered = function() {
-    /*$(".btn-sort").popover({
+    $(".btn-sort").popover({
         html: true,
         title: 'Sort',
         animation: true,
         placement: 'bottom',
         content: function() {
-            return $(".customaffix").html();
+            return $(".custompopover").html();
         }
-    });*/
+    });
 }
 
 Template.sidenav.events({
@@ -165,6 +169,48 @@ Template.videothumb.helpers({
         return true
     }
 })
+
+Template.videothumb.events({
+    'click .btn-delete'(event , instance){
+        event.stopPropagation();
+
+        $('#modaldelete').modal('toggle'); 
+        
+        //console.dir(instance)
+        
+        Session.set('todelete', instance.data.youtube);
+    }
+})
+
+Template.modaldelete.onCreated(function(){
+    this.subscribe('videos');
+})
+
+Template.modaldelete.events({
+    'click .btn-yes'(event , instance){
+        event.stopPropagation();
+
+        //console.dir(instance) 
+        
+        var todelete = Session.get('todelete')
+        
+        $('#modaldelete').modal('toggle'); 
+        
+        if(todelete){
+            var video = Videos.find({youtube:todelete}).fetch();
+
+            for(var i = 0 ; i < video.length ; i++){
+                var id = video[i]._id
+                Videos.remove({"_id" : id} , function(error , count){
+                    if(error) console.dir(error)
+                })
+            }
+            
+        }
+    }
+})
+
+
 
 Template.videoform.events({ 
     'submit #videoform'(event) {
