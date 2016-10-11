@@ -1,5 +1,7 @@
 import { Videos } from '../lib/videosCollection'
 
+Router.onBeforeAction('loading');
+
 Router.route('/', function () {
   this.render('splash-screen', {
     
@@ -26,10 +28,19 @@ Router.route('/videos', {
      layoutTemplate: 'videos'
 });
 
-Router.route('/edit',{
+Router.route('/edit/:_id',{
     template : 'editpage',
-    path : '/edit',
-    layoutTemplate : 'editpage'
+    path : '/edit/:_id',
+    layoutTemplate : 'editpage',
+    subscriptions: function() {
+        this.subscribe('videos');
+    },
+    data: function () {
+        return Videos.findOne({youtube: this.params._id});
+    },
+    waitOn: function () {
+        return this.subscribe('videos');
+    }
 })
 
 

@@ -21,6 +21,22 @@ Template.registerHelper("getThumb", function (url) {
     return youtube_video_id;
 });
 
+Template.editpage.onCreated(function(){
+    
+    this.subscribe('videos');
+    
+    this.video = function(){
+        return Videos.find({youtube : Router.current().params._id})
+    }
+    
+})
+
+Template.editpage.helpers({
+    video : function() { 
+        return Template.instance().video()
+    }
+})
+
 
 
 Template.land.onCreated(function () {
@@ -178,11 +194,6 @@ Template.videothumb.events({
         //console.dir(instance)
         
         Session.set('todelete', instance.data.youtube);
-    },
-    'click .btn-edit'(event , instance){
-        event.stopPropagation();
-        
-        Router.go('edit')
     }
 })
 
@@ -264,16 +275,16 @@ Template.video.onCreated(function(){
     //Session.set('videodata', data)
     
     if(data){
-        instance.subscribe('comments',data.youtube);
+        instance.subscribe('comments',Router.current().params._id);
     }
     
     instance.autorun(function(){
-        instance.subscribe('comments',data.youtube);
+        instance.subscribe('comments',Router.current().params._id);
     })
     
     // 2. Cursor to comments instance from database
     instance.comments = function(){
-        return Comments.find({youtube: data.youtube})
+        return Comments.find({youtube: Router.current().params._id})
     }
     
     Session.set('clicked', false);
@@ -345,7 +356,7 @@ Template.commentform.onCreated(function () {
   // will re-run when the "limit" reactive variables changes
   instance.autorun(function () {
     // subscribe to the posts publication
-    var subscription = instance.subscribe('comments',instance.data.youtube);
+    var subscription = instance.subscribe('comments',Router.current().params._id);
   });
 
 
@@ -383,7 +394,7 @@ Template.commentform.events({
         var target = event.target;
         var comment = target.commentarea.value;
         var rating = $('#ratingcomment').data('userrating');
-        var youtube = instance.data.youtube;
+        var youtube = Router.current().params._id;
         var user = Meteor.user().username;
         
         $(target.commentarea).val("");
