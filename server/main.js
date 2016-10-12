@@ -13,18 +13,18 @@ Meteor.startup(() => {
 
     Videos.remove({}); //delete all
 
-    Videos.insert({youtube: "zgLRFwwbLi8" , title : "Title One" , comment : "Comment One",url:"https://www.youtube.com/embed/zgLRFwwbLi8" , username:"paulo101977" , rating : "5"});
-    Videos.insert({youtube: "pUb63Dc7-Bw" , title : "Title Two" , comment : "Comment two",url:"https://www.youtube.com/embed/pUb63Dc7-Bw" , username:"paulo101977" , rating : "3"});
-    Videos.insert({youtube: "QA_tK8wffwc" , title : "Title Three" , comment : "Comment Three",url:"https://www.youtube.com/embed/QA_tK8wffwc" , username:"paulo101977" , rating : "4"});
-    Videos.insert({youtube: "zgLRFwwbLi8" , title : "Title Four" , comment : "Comment Four",url:"https://www.youtube.com/embed/zgLRFwwbLi8" , username:"paulo" , rating : "1"});
-    Videos.insert({youtube: "pUb63Dc7-Bw" , title : "Title Five" , comment : "Comment Five",url:"https://www.youtube.com/embed/pUb63Dc7-Bw" , username:"paulo" , rating : "5"});
-    Videos.insert({youtube: "QA_tK8wffwc" , title : "Title Six" , comment : "Comment Six",url:"https://www.youtube.com/embed/QA_tK8wffwc" , username:"paulo101977" , rating : "2"});
+    Videos.insert({youtube: "zgLRFwwbLi8" , title : "Title One" , comment : "Comment One",url:"https://www.youtube.com/embed/zgLRFwwbLi8" , username:"paulo101977" , rating : "5",date : new Date()});
+    Videos.insert({youtube: "pUb63Dc7-Bw" , title : "Title Two" , comment : "Comment two",url:"https://www.youtube.com/embed/pUb63Dc7-Bw" , username:"paulo101977" , rating : "3",date : new Date()});
+    Videos.insert({youtube: "QA_tK8wffwc" , title : "Title Three" , comment : "Comment Three",url:"https://www.youtube.com/embed/QA_tK8wffwc" , username:"paulo101977" , rating : "4",date : new Date()});
+    Videos.insert({youtube: "zgLRFwwbLi8" , title : "Title Four" , comment : "Comment Four",url:"https://www.youtube.com/watch?v=1skSrlw4JRU" , username:"paulo" , rating : "1",date : new Date()});
+    Videos.insert({youtube: "pUb63Dc7-Bw" , title : "Title Five" , comment : "Comment Five",url:"https://www.youtube.com/watch?v=8JjVPiDLdH4" , username:"paulo" , rating : "5",date : new Date()});
+    Videos.insert({youtube: "QA_tK8wffwc" , title : "Title Six" , comment : "Comment Six",url:"https://www.youtube.com/watch?v=YjQVCX1bww0" , username:"paulo101977" , rating : "2",date : new Date()});
     
     
     Comments.remove({});
     
-    Comments.insert({youtube: "zgLRFwwbLi8" , comment : "Comment One" , username:"paulo101977",rating: 3})
-    Comments.insert({youtube: "zgLRFwwbLi8" , comment : "Comment Two" , username:"paulo101977",rating:4})
+    Comments.insert({youtube: "zgLRFwwbLi8" , comment : "Comment One" , username:"paulo101977",rating: 3,date : new Date()})
+    Comments.insert({youtube: "zgLRFwwbLi8" , comment : "Comment Two" , username:"paulo101977",rating:4,date : new Date()})
     
 });
 

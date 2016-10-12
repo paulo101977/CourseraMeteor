@@ -9,6 +9,8 @@ import { Comments } from '../lib/comments'
 import './main.html';
 
 import { Accounts } from 'meteor/accounts-base';
+
+Session.set('sort' , 'date');
  
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_ONLY',
@@ -21,6 +23,8 @@ Template.registerHelper("getThumb", function (url) {
     return youtube_video_id;
 });
 
+
+//Template Edit
 Template.editpage.onCreated(function(){
     
     this.subscribe('videos');
@@ -38,44 +42,55 @@ Template.editpage.helpers({
 })
 
 
-
+//Template Land
 Template.land.onCreated(function () {
 
   // 1. Initialization
   var instance = this;
     
   //Videos = new Mongo.Collection('videos');
+    
+ 
+ instance.subscribe('videos');
 
 
   // 1. Autorun
 
-  // will re-run when the "limit" reactive variables changes
-  instance.autorun(function () {
-
-
-    // subscribe to the posts publication
-    var subscription = instance.subscribe('videos');
-  });
 
   // 2. Cursor to videos instance from database
-  instance.videos = function() { 
-    return Videos.find({});
+  instance.videos = function(sort_order) { 
+    return Videos.find({},{sort:sort_order});
   }
+  
+  // will re-run when the "limit" reactive variables changes
+  instance.autorun(function () {
+      /*var sort = Session.get('sort');
+      
+      var sort_order = {}
+      
+      sort_order[sort] = 1;
+
+      instance.videos(sort_order)*/
+  });
 
 });
-
-
 
 
 Template.land.helpers({
     //videos: Tracker.autorun(function(){ return JSON.parse(Session.get("data")) }) ,
     videos: function () {
-        //Meteor.subscribe('videos')
-        return Template.instance().videos();
+       //Meteor.subscribe('videos')
+       var sort = Session.get('sort');
+      
+       var sort_order = {}
+      
+       sort_order[sort] = 1;
+        
+       return Template.instance().videos(sort_order);
     }
 })
 
-
+//Template Caroussel
 Template.caroussel.onCreated(function(){
   // 1. Initialization
   var instance = this;
@@ -113,7 +128,7 @@ Template.caroussel.helpers({
     }*/
 })
 
-
+//Template Navbar
 Template.navbar.helpers({
     toggleModal(){
         $('#modalvideo').modal('toggle')
@@ -158,6 +173,8 @@ Template.navbar.rendered = function() {
     });
 }
 
+
+//Template Sidenav
 Template.sidenav.events({
     'click .closebtn'(event,instance){
         document.getElementById("mySidenav").style.width = "0";
@@ -166,6 +183,8 @@ Template.sidenav.events({
     }
 })
 
+
+//Template Videothumb
 Template.videothumb.helpers({
     
     //get thumb url from youtube
@@ -197,6 +216,7 @@ Template.videothumb.events({
     }
 })
 
+//Template modaldelete
 Template.modaldelete.onCreated(function(){
     this.subscribe('videos');
 })
@@ -226,7 +246,7 @@ Template.modaldelete.events({
 })
 
 
-
+//template videoform
 Template.videoform.events({ 
     'submit #videoform'(event) {
     // Prevent default browser form submit
@@ -255,7 +275,7 @@ Template.videoform.events({
     
     
     //new data object
-    var obj = {url : url , youtube : youtube_video_id , title : title , comment : comment , username : user , rating : rating}
+    var obj = {url : url , youtube : youtube_video_id , title : title , comment : comment , username : user , rating : rating , date : new Date()}
 
     //insert in database
     Videos.insert(obj)
@@ -266,6 +286,7 @@ Template.videoform.events({
   }
 })
 
+//Template video
 Template.video.onCreated(function(){
     var data = this.data;
     
@@ -320,6 +341,7 @@ Template.video.events({
     }
 })
 
+//template videos
 Template.videos.onCreated(function(){
     var instance = this;
     
@@ -329,14 +351,20 @@ Template.videos.onCreated(function(){
         instance.subscribe('videos');
     })
     
-    instance.videos = function(){
-        return Videos.find({})
+    instance.videos = function(sort_order){
+        return Videos.find({} , {sort : sort_order})
     }
 })
 
 Template.videos.helpers({
     videos : function(){
-        return Template.instance().videos();
+        var sort = Session.get('sort');
+      
+       var sort_order = {}
+      
+       sort_order[sort] = 1;
+        
+       return Template.instance().videos(sort_order);
     },
     /*getThumb(url) {
         var youtube_video_id = url.match(/youtube\.com.*(\?v=|\/embed\/)(.{11})/).pop();
@@ -344,6 +372,7 @@ Template.videos.helpers({
     },*/
 })
 
+//template comment form
 Template.commentform.onCreated(function () {
 
   // 1. Initialization
@@ -405,9 +434,38 @@ Template.commentform.events({
         if(!rating) rating = 0;
 
         
-        var obj = {comment : comment , youtube : youtube , username : user , rating : rating}
+        var obj = {comment : comment , youtube : youtube , username : user , rating : rating , date : new Date()}
         
         Comments.insert(obj);
     }
 })
+
+//youtube, title , comment , username, rating ,date 
+
+//http://stackoverflow.com/questions/21657960/bootstrap-3-meteor-event-on-radio-buttons
+Template.custompopover.onCreated(function(){
+    
+    $(document.body).on('change.tplcustompopover', '#dateradio', function(e){
+        // handler
+        Session.set('sort' , 'date');
+    });
+    
+    $(document.body).on('change.tplcustompopover', '#titleradio', function(e){
+        // handler
+        Session.set('sort' , 'title');
+    });
+    
+    $(document.body).on('change.tplcustompopover', '#ratingradio', function(e){
+        // handler
+        Session.set('sort' , 'rating');
+    });
+    
+    $(document.body).on('change.tplcustompopover', '#userradio', function(e){
+        // handler
+        Session.set('sort' , 'username');
+    });
+    
+    
+})
+
 
