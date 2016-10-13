@@ -465,7 +465,11 @@ Template.custompopover.onCreated(function(){
         Session.set('sort' , 'username');
     });
     
-    
+    //commentradio
+    $(document.body).on('change.tplcustompopover', '#commentradio', function(e){
+        // handler
+        Session.set('sort' , 'comment');
+    });
 })
 
 
