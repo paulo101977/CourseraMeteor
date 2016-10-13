@@ -247,12 +247,18 @@ Template.modaldelete.events({
 
 
 //template videoform
+
+
 Template.videoform.events({ 
     'submit #videoform'(event) {
     // Prevent default browser form submit
     event.preventDefault();
+        
+    var routeName = Router.current().route.getName();
+        
+    console.log(routeName)
  
-    
+    //Router.g
     //hide modal
     $('#modalvideo').modal('toggle');
     
@@ -472,4 +478,58 @@ Template.custompopover.onCreated(function(){
     });
 })
 
+Template.editform.onCreated(function(){
+    this.subscribe('videos')         
+})
 
+//tempalte editform
+Template.editform.events({
+    'submit #editform'(event,instance){
+        event.preventDefault();
+        
+        console.dir(instance);
+        
+        
+        var target = event.target;
+        var title = target.title.value;
+        var comment = target.comment.value;
+        var rating = $('#rating').data('userrating');
+        var youtube = Router.current().params._id;
+        //var user = Meteor.user().username; //not needed
+        
+        var video = Videos.find({youtube : youtube}).fetch()[0];
+        
+        console.log(video._id)
+        
+        if(video){
+           Videos.update({_id : video._id},{$set:{title: title, comment : comment, rating : rating, date: new Date()}},
+             function(err,sucess){
+                if(err){
+
+                    $('.alert-warning').removeClass('hide');
+                    $('.alert-warning').animate({
+                        opacity: 1
+                    }, {duration:1500,
+                       complete: function(){
+                          Router.go('land') 
+                       }})  
+                }
+                if(sucess){
+                    $('.alert-success').removeClass('hide');
+                    $('.alert-success').animate({
+                        opacity: 1
+                    }, {duration:1500,
+                       complete: function(){
+                          Router.go('land') 
+                       }})
+                }
+             }); 
+        }
+        
+        //Router.go('land')
+        //Videos.update({_id : "Jack"},{$set:{age : 13, username : "Jack"}});
+    },
+    'click .btn-cancel'(event,instance){
+        Router.go('land');
+    }
+})

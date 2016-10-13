@@ -5,7 +5,23 @@
 
         <div class="container">
             <div class="row">
-
+                <div class="col-md-8">
+                    <img class="edit-img-custom" src="//img.youtube.com/vi/{{getThumb(url)}}/0.jpg" alt="...">
+                </div>
+                
+                <div class="col-md-8">
+                    <div class="alert alert-success hide" role="alert">
+                      <strong>Well done!</strong> The change in the video was successful!
+                    </div>
+                    <div class="alert alert-warning hide" role="alert">
+                      <strong>Alert!</strong> The change in the video was not successful!!
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                         {{> editform}}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

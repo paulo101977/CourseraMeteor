@@ -44,6 +44,15 @@
     top: 15px;
 }
 
+.edit-img-custom{
+    width: 100% !important;
+}
+
+.alert{
+    margin-top: 20px;
+    opacity: 0;
+}
+
 .carousel-caption{
     position: absolute;
     height: 270px !important;
