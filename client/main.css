@@ -53,6 +53,12 @@
     opacity: 0;
 }
 
+#map{
+    width: auto;
+    height: 300px;
+    background: black;
+}
+
 .carousel-caption{
     position: absolute;
     height: 270px !important;

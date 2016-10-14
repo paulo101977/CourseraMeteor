@@ -533,3 +533,33 @@ Template.editform.events({
         Router.go('land');
     }
 })
+
+Template.about.onCreated(function(){
+    GoogleMaps.load();
+    
+    GoogleMaps.ready('map', function(map) {
+        // Add a marker to the map once it's ready
+        var marker = new google.maps.Marker({
+            position: map.options.center,
+            map: map.instance,
+            title: 'I am here!'
+        });
+      });
+})
+
+Template.about.helpers({
+  mapOptions: function() {
+    // Make sure the maps API has loaded
+    if (GoogleMaps.loaded()) {
+        
+        //var myLatLng = {lat: -22.8790217, lng: -43.5257598};
+
+      // Map initialization options
+      return {
+        scrollwheel: false,
+        center: new google.maps.LatLng(-22.8790217,-43.5257598),
+        zoom: 15
+      };
+    }
+  }
+});
