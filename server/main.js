@@ -38,6 +38,28 @@ Meteor.publish('comments',function(youtube){
    return Comments.find({youtube : youtube})         
 });
 
+Videos.allow({
+    'insert': function (userId,doc) {
+      /* user and doc checks ,
+      return true to allow insert */
+      return true; 
+    },
+    remove: function (userId, docs){
+        return true;
+    }
+});
+
+Comments.allow({
+    'insert': function (userId,doc) {
+      /* user and doc checks ,
+      return true to allow insert */
+      return true; 
+    },
+    remove: function (userId, docs){
+        return true;
+    }
+});
+
 
 
 
