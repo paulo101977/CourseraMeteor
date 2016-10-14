@@ -545,6 +545,7 @@ Template.about.onCreated(function(){
             title: 'I am here!'
         });
       });
+    
 })
 
 Template.about.helpers({
