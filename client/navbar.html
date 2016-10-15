@@ -13,9 +13,11 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {{#if currentUser}}
+                {{#if toggleSort}}
                 <li class="btn-space">
                     <button click="toggleModal()" class="btn btn-default btn-space btn-video"><i class="glyphicon glyphicon-plus-sign"></i>Add more videos...</button>
                 </li>
+                {{/if}}
             {{/if}}
             <li>{{> loginButtons}}</li>
           </ul>
