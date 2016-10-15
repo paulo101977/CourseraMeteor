@@ -22,7 +22,11 @@
     height: auto;
 }
 
-.modal-body-delete{
+.deletecomment > .modal-dialog{
+    height: auto;
+}
+
+.modal-body-delete , .modal-body-deletecomment{
     height: inherit !important;
 }
 

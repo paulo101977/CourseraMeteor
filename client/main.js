@@ -411,6 +411,64 @@ Template.comment_template.helpers({
     }
 })
 
+Template.comment_template.events({
+    'click .btn-edit'(event,instance){
+        
+        //console.dir(instance)
+        
+        //data about this comment
+        
+        $('.editcommentmodal').modal('toggle');
+        var data = instance.data;
+        $('.commentarea').val(data.comment);
+        var rating = data.rating;
+        Session.set('rating',rating);
+        Session.set('commentId', instance.data._id)
+    },
+    'click .btn-delete'(event,instance){
+        
+        Session.set('idComment', instance.data._id)
+        
+        $('.deletecomment').modal('toggle')
+    }
+})
+
+Template.editcommentmodal.helpers({
+    rating: function(){
+        return Session.get('rating');
+    }
+})
+
+Template.editcommentmodal.events({
+    'click .btn-cancel'(event,instance){
+        event.preventDefault();
+        
+        $('.editcommentmodal').modal('toggle');
+    },
+    'submit .editcommentmodal'(event,instance){
+        event.preventDefault();
+        
+        var id = Session.get('commentId')
+        
+        //Videos.update({_id : video._id},{$set:{title: title, comment : comment, rating : rating, date: new Date()}}
+        Comments.update({_id : id } , {$set:{comment : $('.commentarea').val(),rating:$('#ratingcommentform').data('userrating')}})
+        
+        $('.editcommentmodal').modal('toggle')
+    }
+})
+
+Template.deletecomment.events({
+    'click .btn-yes'(event,instance){
+        event.preventDefault();
+        
+        var id = Session.get('idComment');
+        
+        Comments.remove({_id : id})
+        
+        $('.deletecomment').modal('toggle')
+    }
+})
+
 Template.commentform.events({
     'submit #comments'(event,instance){
         
@@ -443,6 +501,19 @@ Template.commentform.events({
         var obj = {comment : comment , youtube : youtube , username : user , rating : rating , date : new Date()}
         
         Comments.insert(obj);
+    },
+    'click .btn-cancel'(events,instance){
+        
+        event.preventDefault();
+        
+        var target = event.target;
+        $(target.commentarea).val("");
+        $('#ratingcomment').trigger('reset')
+        
+        $("#commentcontainer").stop().animate({
+            height : 0,
+            'border-width' : 0
+        },200)
     }
 })
 
@@ -486,9 +557,7 @@ Template.editform.onCreated(function(){
 Template.editform.events({
     'submit #editform'(event,instance){
         event.preventDefault();
-        
-        console.dir(instance);
-        
+         
         
         var target = event.target;
         var title = target.title.value;
@@ -499,7 +568,6 @@ Template.editform.events({
         
         var video = Videos.find({youtube : youtube}).fetch()[0];
         
-        console.log(video._id)
         
         if(video){
            Videos.update({_id : video._id},{$set:{title: title, comment : comment, rating : rating, date: new Date()}},
