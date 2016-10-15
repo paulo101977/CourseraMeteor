@@ -603,7 +603,7 @@ Template.editform.events({
 })
 
 Template.about.onCreated(function(){
-    GoogleMaps.load();
+    GoogleMaps.load({key: 'AIzaSyBJGgUr2Jb51pp1z2_YfN7hKnguSFibNPY'});
     
     GoogleMaps.ready('map', function(map) {
         // Add a marker to the map once it's ready
